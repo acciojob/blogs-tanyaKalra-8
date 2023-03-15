@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class ImageService {
@@ -48,6 +49,16 @@ public class ImageService {
 
     public int countImagesInScreen(Integer id, String screenDimensions) {
         //Find the number of images of given dimensions that can fit in a screen having `screenDimensions`
-        return 0;
+        Image image = imageRepository2.findById(id).get();
+        String dimension = image.getDimensions();
+        dimension = dimension.toLowerCase();
+        screenDimensions = screenDimensions.toLowerCase();
+        String[] dimensions = dimension.split("x");
+        String[] screenDimension = screenDimensions.split("x");
+        int finalDimension = Integer.parseInt(dimensions[0])*Integer.parseInt(dimensions[1]);
+        int finalScreenDimension =  Integer.parseInt(screenDimension[0])*Integer.parseInt(screenDimension[1]);
+
+        return finalScreenDimension/finalDimension;
+
     }
 }
