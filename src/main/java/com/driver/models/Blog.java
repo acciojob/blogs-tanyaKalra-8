@@ -25,11 +25,11 @@ public class Blog {
     public Blog() {
     }
 
-    public Blog(int id, String title, String content, Date pubDate) {
-        this.id = id;
+    public Blog(String title, String content, Date pubDate, User user) {
         this.title = title;
         this.content = content;
         this.pubDate = pubDate;
+        this.user = user;
     }
 
     public int getId() {

@@ -18,10 +18,10 @@ public class Image {
     public Image() {
     }
 
-    public Image(int id, String description, String dimensions) {
-        this.id = id;
+    public Image(String description, String dimensions, Blog blog) {
         this.description = description;
         this.dimensions = dimensions;
+        this.blog = blog;
     }
 
     public int getId() {

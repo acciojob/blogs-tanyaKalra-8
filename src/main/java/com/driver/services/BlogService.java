@@ -25,15 +25,16 @@ public class BlogService {
         //create a blog at the current time
         User user = userRepository1.findById(userId).get();
 
-        Blog blog = new Blog();
-        blog.setTitle(title);
-        blog.setContent(content);
-        blog.setPubDate(new Date());
-        blog.setUser(user);
+        Blog blog = new Blog(title,content,new Date(),user);
+//        blog.setTitle(title);
+//        blog.setContent(content);
+//        blog.setPubDate(new Date());
+//        blog.setUser(user);
 
-        List<Blog> blogList = user.getBlogList();
-        blogList.add(blog);
-        user.setBlogList(blogList);
+//        List<Blog> blogList = user.getBlogList();
+//        blogList.add(blog);
+//        user.setBlogList(blogList);
+        user.getBlogList().add(blog);
 
         userRepository1.save(user);
         return blog;
@@ -44,9 +45,11 @@ public class BlogService {
         if (blogRepository1.existsById(blogId)){
             Blog blog =  blogRepository1.findById(blogId).get();
             User user = blog.getUser();
-            List<Blog> blogList = user.getBlogList();
-            blogList.remove(blog);
-            user.setBlogList(blogList);
+
+//            List<Blog> blogList = user.getBlogList();
+//            blogList.remove(blog);
+//            user.setBlogList(blogList);
+            user.getBlogList().remove(blog);
 
             userRepository1.save(user);
             blogRepository1.deleteById(blogId);

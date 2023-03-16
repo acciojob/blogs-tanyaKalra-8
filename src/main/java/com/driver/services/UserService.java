@@ -11,44 +11,30 @@ import java.util.List;
 @Service
 public class UserService {
     @Autowired
-    UserRepository userRepository;
+    UserRepository userRepository3;
 
     public User createUser(String username, String password){
 
         User user =  new User();
-        if (username != null && password != null){
-            user.setUsername(username);
-            user.setPassword(password);
-            user.setFirstName("test");
-            user.setLastName("test");
-        }
 
-        userRepository.save(user);
+        user.setUsername(username);
+        user.setPassword(password);
+
+        userRepository3.save(user);
         return user;
     }
 
     public void deleteUser(int userId){
-
-        if (userRepository.existsById(userId)) {
-            User user = userRepository.findById(userId).get();
-            List<Blog> blogList = user.getBlogList();
-            blogList.clear();;
-            user.setBlogList(blogList);
-
-            userRepository.deleteById(userId);
-        }
+        userRepository3.deleteById(userId);
     }
 
     public User updateUser(Integer id, String password){
 
-        if (userRepository.existsById(id)){
-            User user = userRepository.findById(id).get();
-            if (password!= null){
-                user.setPassword(password);
-            }
-            userRepository.save(user);
-            return user;
-        }
-        return null;
+        User user = userRepository3.findById(id).get();
+
+        user.setPassword(password);
+
+        userRepository3.save(user);
+        return user;
     }
 }

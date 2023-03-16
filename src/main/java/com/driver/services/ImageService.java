@@ -20,22 +20,21 @@ public class ImageService {
         //add an image to the blog
         Blog blog = blogRepository2.findById(blogId).get();
 
-        Image image = new Image();
-        image.setDescription(description);
-        image.setDimensions(dimensions);
-        image.setBlog(blog);
+        Image image = new Image(description,description,blog);
+//        image.setDescription(description);
+//        image.setDimensions(dimensions);
+//        image.setBlog(blog);
 
-        List<Image> imageList = blog.getImageList();
-        imageList.add(image);
-        blog.setImageList(imageList);
+//        List<Image> imageList = blog.getImageList();
+//        imageList.add(image);
+//        blog.setImageList(imageList);
+        blog.getImageList().add(image);
 
         blogRepository2.save(blog);
         return image;
     }
 
     public void deleteImage(Integer id){
-
-        if (imageRepository2.existsById(id)){
 
             Image image = imageRepository2.findById(id).get();
 
@@ -47,7 +46,6 @@ public class ImageService {
 
             blogRepository2.save(blog);
             imageRepository2.deleteById(id);
-        }
     }
 
     public int countImagesInScreen(Integer id, String screenDimensions) {
