@@ -35,16 +35,19 @@ public class ImageService {
 
     public void deleteImage(Integer id){
 
-        Image image = imageRepository2.findById(id).get();
+        if (imageRepository2.existsById(id)){
 
-        //finding parent object
-        Blog blog = image.getBlog();
-        List<Image> imageList = blog.getImageList();
-        imageList.remove(image);
-        blog.setImageList(imageList);
+            Image image = imageRepository2.findById(id).get();
 
-        blogRepository2.save(blog);
-        imageRepository2.deleteById(id);
+            //finding parent object
+            Blog blog = image.getBlog();
+            List<Image> imageList = blog.getImageList();
+            imageList.remove(image);
+            blog.setImageList(imageList);
+
+            blogRepository2.save(blog);
+            imageRepository2.deleteById(id);
+        }
     }
 
     public int countImagesInScreen(Integer id, String screenDimensions) {
